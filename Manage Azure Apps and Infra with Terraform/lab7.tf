@@ -5,7 +5,7 @@ provider "azurerm" {
 resource "azurerm_mysql_server" "example" {
   name                = "tflab-mysqlserver-1-a3df8eb"
   location            = "eastus"
-  resource_group_name = "186-d8da27ae-deploy-a-mariadb-database-with-terraf"
+  resource_group_name = "($azresourcegroup)"
 
   sku {
     name     = "B_Gen5_2"
@@ -21,14 +21,14 @@ resource "azurerm_mysql_server" "example" {
   }
 
   administrator_login          = "mysqladminun"
-  administrator_login_password = "easytologin4once!"
+  administrator_login_password = "($dbazpass)"
   version                      = "5.7"
   ssl_enforcement              = "Enabled"
 }
 
 resource "azurerm_mysql_database" "example" {
   name                = "exampledb"
-  resource_group_name = "186-d8da27ae-deploy-a-mariadb-database-with-terraf"
+  resource_group_name = "($azresourcegroup)"
   server_name         = azurerm_mysql_server.example.name
   charset             = "utf8"
   collation           = "utf8_unicode_ci"

@@ -5,7 +5,7 @@ provider "azurerm" {
 resource "azurerm_app_service_plan" "svcplan" {
   name                = "lalab-webapp-serviceplan"
   location            = "eastus"
-  resource_group_name = "191-657abe14-deploy-a-web-application-with-terrafo"
+  resource_group_name = "($azresourcegroup)"
 
   sku {
     tier = "Standard"
@@ -16,7 +16,7 @@ resource "azurerm_app_service_plan" "svcplan" {
 resource "azurerm_app_service" "appsvc" {
   name                = "lalab-webapp-1"
   location            = "eastus"
-  resource_group_name = "191-657abe14-deploy-a-web-application-with-terrafo"
+  resource_group_name = "($azresourcegroup)"
   app_service_plan_id = azurerm_app_service_plan.svcplan.id
 
 

@@ -5,7 +5,7 @@ provider "azurerm" {
 resource "azurerm_network_security_group" "nsg" {
   name                = "LabNSG"
   location            = "East US"
-  resource_group_name = "185-ceb0769f-create-azure-nsgs-with-terraform-8w8"
+  resource_group_name = "($azresourcegroup)"
 }
 
 resource "azurerm_network_security_rule" "example1" {
@@ -18,7 +18,7 @@ resource "azurerm_network_security_rule" "example1" {
   destination_port_range      = "80"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = "185-ceb0769f-create-azure-nsgs-with-terraform-8w8"
+  resource_group_name         = "($azresourcegroup)"
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
 
@@ -32,7 +32,7 @@ resource "azurerm_network_security_rule" "example2" {
   destination_port_range      = "8080"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = "185-ceb0769f-create-azure-nsgs-with-terraform-8w8"
+  resource_group_name         = "($azresourcegroup)"
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
 
@@ -46,7 +46,7 @@ resource "azurerm_network_security_rule" "example2" {
   destination_port_range      = "22"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = "185-ceb0769f-create-azure-nsgs-with-terraform-8w8"
+  resource_group_name         = "($azresourcegroup)"
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
 
@@ -60,6 +60,6 @@ resource "azurerm_network_security_rule" "example2" {
   destination_port_range      = "80"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = "185-ceb0769f-create-azure-nsgs-with-terraform-8w8"
+  resource_group_name         = "($azresourcegroup)"
   network_security_group_name = azurerm_network_security_group.nsg.name
 }

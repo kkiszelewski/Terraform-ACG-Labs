@@ -7,7 +7,7 @@ resource "azurerm_virtual_network" "TFNet" {
     name                = "LALabvNet2"
     address_space       = ["10.0.0.0/16"]
     location            = "East US"
-    resource_group_name = "187-47676528-deploying-an-azure-vm-with-terraform"
+    resource_group_name = "($azresourcegroup)"
 
     tags = {
         environment = "Terraform VNET"
@@ -16,7 +16,7 @@ resource "azurerm_virtual_network" "TFNet" {
 # Create subnet
 resource "azurerm_subnet" "tfsubnet" {
     name                 = "default"
-    resource_group_name = "187-47676528-deploying-an-azure-vm-with-terraform"
+    resource_group_name = "($azresourcegroup)"
     virtual_network_name = azurerm_virtual_network.TFNet.name
     address_prefix       = "10.0.1.0/24"
 }
@@ -25,7 +25,7 @@ resource "azurerm_subnet" "tfsubnet" {
 resource "azurerm_public_ip" "example" {
   name                = "pubip1"
   location            = "East US"
-  resource_group_name = "187-47676528-deploying-an-azure-vm-with-terraform"
+  resource_group_name = "($azresourcegroup)"
   allocation_method   = "Dynamic"
   sku                 = "Basic"
 }
@@ -34,7 +34,7 @@ resource "azurerm_public_ip" "example" {
 resource "azurerm_network_interface" "example" {
   name                = "LALabNIC1"
   location            = "East US"
-  resource_group_name = "187-47676528-deploying-an-azure-vm-with-terraform"
+  resource_group_name = "($azresourcegroup)"
 
     ip_configuration {
     name                          = "ipconfig1"
@@ -47,7 +47,7 @@ resource "azurerm_network_interface" "example" {
 #Create Boot Diagnostic Account
 resource "azurerm_storage_account" "sa" {
   name                     = "lalabdiag1"
-  resource_group_name      = "187-47676528-deploying-an-azure-vm-with-terraform"
+  resource_group_name      = "($azresourcegroup)"
   location                 = "East US"
    account_tier            = "Standard"
    account_replication_type = "LRS"
@@ -62,7 +62,7 @@ resource "azurerm_storage_account" "sa" {
 resource "azurerm_virtual_machine" "example" {
   name                  = "LALabVM1"
   location              = "East US"
-  resource_group_name   = "187-47676528-deploying-an-azure-vm-with-terraform"
+  resource_group_name   = "($azresourcegroup)"
   network_interface_ids = [azurerm_network_interface.example.id]
   vm_size               = "Standard_B1s"
   delete_os_disk_on_termination = true
@@ -86,7 +86,7 @@ resource "azurerm_virtual_machine" "example" {
   os_profile {
     computer_name  = "LALabVM1"
     admin_username = "vmadmin"
-    admin_password = "Password12345!"
+    admin_password = "($azpass)"
   }
 
   os_profile_linux_config {

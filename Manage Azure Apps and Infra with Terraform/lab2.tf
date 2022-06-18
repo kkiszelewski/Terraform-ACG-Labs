@@ -4,7 +4,7 @@ provider "azurerm" {
     
 resource "azurerm_storage_account" "lab" {
   name                     = "storage4terraformlab2"
-  resource_group_name      = "183-7cdba941-deploy-an-azure-file-share-with-terra"
+  resource_group_name      = "($azresourcegroup)"
   location                 = "East US"
   account_tier             = "Standard"
   account_replication_type = "LRS"
